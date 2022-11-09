@@ -8,9 +8,9 @@ foreach (DataRow dataRow in dataSet.Tables["TableName"].Rows)
    if (dataRow["columnLevelId"] == DBNull.Value)
     {
       TreeNode parentNode = new TreeNode(dataRow["columnName"].ToString());
-      ustDugum.Tag = dataRow["columnId"];
+      parentNode.Tag = dataRow["columnId"];
       treeView1.Nodes.Add(parentNode);
-      AltDugumGetir(dataRow, parentNode);
+      getChildNode(dataRow, parentNode);
      }
 }
 treeView1.ExpandAll();
