@@ -1,0 +1,9 @@
+private void getChildNode(DataRow dataRows, TreeNode addNode)
+  {
+  foreach (DataRow rowData in dataRows.GetChildRows(treeSqlConnection))
+    {
+      TreeNode childNode = new TreeNode(rowData["columnName"].ToString());
+      childNode.Tag = rowData["columnId"];
+      addNode.Nodes.Add(childNode);
+      getChildNode(rowData, childNode);
+    }
