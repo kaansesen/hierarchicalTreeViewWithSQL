@@ -1,0 +1,16 @@
+SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("SELECT * FROM TableName", sqlConnection);
+DataSet dataSet = new DataSet();
+sqlDataAdapter.Fill(dataSet, "TableName");
+treeSqlConnection = new DataRelation("treeSqlConnection", dataSet.Tables["TableName"].Columns["columnId"], dataSet.Tables["columnName"].Columns["columnLevelId"],false);
+dataSet.Relations.Add(treeSqlConnection);
+foreach (DataRow dataRow in dataSet.Tables["TableName"].Rows)
+  {
+   if (dataRow["columnLevelId"] == DBNull.Value)
+    {
+      TreeNode parentNode = new TreeNode(dataRow["columnName"].ToString());
+      ustDugum.Tag = dataRow["columnId"];
+      treeView1.Nodes.Add(parentNode);
+      AltDugumGetir(dataRow, parentNode);
+     }
+}
+treeView1.ExpandAll();
